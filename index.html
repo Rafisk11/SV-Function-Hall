@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SV Function Hall</title>
+    <link rel="icon" href="asserts/images/fav.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Manrope:wght@200..800&display=swap"
+        rel="stylesheet">
+</head>
+
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById('mobileMenu');
+        const overlay = document.getElementById('overlay');
+        const menuIcon = document.querySelector('.menu-icon');
+
+        menu.classList.toggle('active');
+        overlay.classList.toggle('active');
+
+        // Change ☰ to ✕
+        menuIcon.textContent = menu.classList.contains('active') ? '✕' : '☰';
+    }
+
+    // Close menu when clicking overlay
+    document.getElementById('overlay').addEventListener('click', function () {
+        document.getElementById('mobileMenu').classList.remove('active');
+        this.classList.remove('active');
+        document.querySelector('.menu-icon').textContent = '☰';
+    });
+
+    // Mobile dropdown toggle (click to open/close)
+    document.querySelectorAll('.dropdown').forEach(dropdown => {
+        const btn = dropdown.querySelector('.dropbtn');
+        btn.addEventListener('click', function (e) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
+                this.innerHTML = dropdown.classList.contains('active') ?
+                    'Services ▲' : 'Services ▼';
+            }
+        });
+    });
+
+    // Auto Sliding Banner
+    let slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        let slides = document.getElementsByClassName("slide");
+        let dots = document.getElementsByClassName("dot");
+
+        // Hide all slides
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].classList.remove("active");
+            dots[i].classList.remove("active");
+        }
+
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1; }
+
+        slides[slideIndex - 1].classList.add("active");
+        dots[slideIndex - 1].classList.add("active");
+
+        // Change image every 5 seconds
+        setTimeout(showSlides, 5000);
+    }
+
+    // Manual Navigation
+    function currentSlide(n) {
+        slideIndex = n - 1;
+        showSlides();
+    }
+
+    document.querySelector('.next-btn').addEventListener('click', () => {
+        slideIndex++;
+        showSlides();
+    });
+
+    document.querySelector('.prev-btn').addEventListener('click', () => {
+        slideIndex--;
+        if (slideIndex < 1) slideIndex = document.getElementsByClassName("slide").length;
+        showSlides();
+    });
+
+    // Scroll animation for caption items
+    document.addEventListener("DOMContentLoaded", function () {
+        const items = document.querySelectorAll('.animate-caption');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        items.forEach(item => observer.observe(item));
+    });
+
+</script>
+
+<body>
+    <header>
+
+        <!-- TOP BAR -->
+        <div class="top-bar">
+            <div class="top-left">
+                <a
+                    href="https://www.google.com/maps/place/17%C2%B000'24.2%22N+81%C2%B048'09.7%22E/@17.0067148,81.8026811,995m/data=!3m2!1e3!4b1!4m4!3m3!8m2!3d17.0067148!4d81.8026811?entry=ttu&g_ep=EgoyMDI1MTExMi4wIKXMDSoASAFQAw%3D%3D"><span>📍
+                        J.n Road, Rajahmundry Ho, Rajahmundry, AP</span></a>
+                <a href="tel: +91 93913 81165"><span>📞 +91 93913 81165</span></a>
+                <a href="mailto:info@svfunctionhall.in"><span class="booking-link">info@svfunctionhall.in</span></a>
+            </div>
+
+            <div class="top-right">
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-facebook"></i>
+                <i class="fa-brands fa-google"></i>
+            </div>
+        </div>
+
+        <!-- MAIN HEADER -->
+        <div class="main-header">
+            <img src="asserts/images/logo.jpg" class="logo">
+
+            <!-- NAVIGATION -->
+            <nav class="nav-links" id="mobileMenu">
+
+                <a href="#">Home</a>
+                <a href="https://web.archive.org/web/20190225234526/http://www.svfunctionhall.in/about.php">About Us</a>
+
+                <div class="dropdown">
+                    <button class="dropbtn">Services ▼</button>
+                    <div class="dropdown-content">
+                        <a href="https://web.archive.org/web/20190310030808/http://www.svfunctionhall.in/services.php?id=48">Function Hall</a>
+                        <a href="https://web.archive.org/web/20190310030911/http://www.svfunctionhall.in/services.php?id=49">Dinning Hall</a>
+                    </div>
+                </div>
+
+                <a href="https://web.archive.org/web/20190317004851/http://www.svfunctionhall.in/gallery.php">Gallery</a>
+                <a href="https://web.archive.org/web/20190310032240/http://www.svfunctionhall.in/contact.php">Contact Us</a>
+
+                <!-- MOBILE BUTTON -->
+                <a href="https://web.archive.org/web/20190306200002/http://www.svfunctionhall.in/services.php"><button class="mobile-enquire">Book Now</button></a>
+            </nav>
+
+            <!-- DESKTOP BUTTON -->
+            <a href="https://web.archive.org/web/20190306200002/http://www.svfunctionhall.in/services.php"><button class="book-btn">Book Now</button></a>
+
+            <!-- MENU ICON -->
+            <div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+        </div>
+        <div class="overlay" id="overlay"></div>
+    </header>
+
+    <main>
+        <!-- HERO BANNER WITH TEXT ANIMATION -->
+        <section class="hero-banner">
+            <img src="asserts/images/banner1.jpg" alt="SV Function Hall" class="banner-bg">
+
+            <!-- Dark Overlay -->
+            <div class="banner-overlay"></div>
+
+            <!-- Animated Text Content -->
+            <div class="banner-content">
+                <h1 class="animate-text">
+                    Welcome to <span class="highlight">SV Function Hall</span>
+                </h1>
+                <p class="typing-text">Your Dream Event Begins Here...</p>
+                <p class="subtitle">Luxurious Air-Conditioned Hall | 1000+ Capacity | Ample Parking | Best Catering</p>
+
+                <div class="banner-buttons">
+                    <a href="tel:+919391381165" class="btn-primary">Call +91 93913 81165</a>
+                    <a href="https://web.archive.org/web/20190306200002/http://www.svfunctionhall.in/services.php" class="btn-secondary">Book Your Date</a>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <!-- IMAGE WITH CAPTION SECTION -->
+            <section class="image-caption-section">
+                <div class="headings">
+                    <h5>Hello There!</h5>
+                    <h2>Elevating Events <br>At SV Convention Center & Banquet Hall</h2>
+                </div>
+                <div class="caption-grid">
+
+                    <!-- Image 1 -->
+                    <figure class="caption-item animate-caption">
+                        <img src="asserts/images/img1.jpg" alt="Royal Wedding Experience">
+                        <figcaption>
+                            <h3 class="caption-title">Royal Wedding Experience</h3>
+                            <p class="caption-text">
+                                Transform your special day with breathtaking floral arrangements, crystal chandeliers,
+                                and customized stage décor that reflects your unique love story.
+                            </p>
+                        </figcaption>
+                    </figure>
+
+                    <!-- Image 2 -->
+                    <figure class="caption-item animate-caption">
+                        <img src="asserts/images/img2.jpg" alt="Grand Banquet Hall">
+                        <figcaption>
+                            <h3 class="caption-title">Royal Stage Decoration</h3>
+                            <p class="caption-text">
+                                Experience a royal touch with opulent stage décor featuring rich drapes, floral
+                                artistry, and golden accents. Perfect for celebrations that demand sophistication,
+                                beauty, and a majestic presentation.
+                            </p>
+                        </figcaption>
+                    </figure>
+
+                    <!-- Image 3 -->
+                    <figure class="caption-item animate-caption">
+                        <img src="asserts/images/img3.jpg" alt="Premium Catering">
+                        <figcaption>
+                            <h3 class="caption-title">World-Class Catering</h3>
+                            <p class="caption-text">
+                                Multi-cuisine delights prepared by award-winning chefs. Live counters,
+                                hygienic kitchen, and personalized menu options for every occasion.
+                            </p>
+                        </figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <!-- CENTERED BUTTON ADDED HERE -->
+            <div class="services-btn-container">
+                <a href="https://web.archive.org/web/20190306200002/http://www.svfunctionhall.in/services.php" class="services-btn">Explore All Our Services</a>
+            </div>
+
+
+            <section class="icon-facilities">
+                <div class="headings">
+                    <h5>Other Facilities</h5>
+                    <h2>Premier Facilities <br>At SV Convention Center</h2>
+                    <p>Our state-of-the-art convention facilities feature versatile spaces and top-tier amenities,
+                        perfect for hosting events like conventions, conferences, and weddings.</p>
+                </div>
+
+                <div class="fecilities">
+                    <div class="facility-card">
+                        <img src="asserts/images/img4.png" alt="Flower decoration">
+                        <h3>Flower Decoration</h3>
+                        <p>Elevate your event ambience with exquisite flower decorations.</p>
+                    </div>
+
+                    <div class="facility-card">
+                        <img src="asserts/images/img5.png" alt="Caterers">
+                        <h3>Caterers</h3>
+                        <p>Delight your guests at our international convention center.</p>
+                    </div>
+
+                    <div class="facility-card">
+                        <img src="asserts/images/img6.png" alt="Event Management">
+                        <h3>Event Management team</h3>
+                        <p>Our expert team ensures seamless events.</p>
+                    </div>
+
+                    <div class="facility-card">
+                        <img src="asserts/images/img7.png" alt="Professional Shoots">
+                        <h3>Professional Shoots</h3>
+                        <p>Capture memorable moments with photography services.</p>
+                    </div>
+
+                    <div class="facility-card">
+                        <img src="asserts/images/img8.png" alt="Entertainment">
+                        <h3>Entertainment</h3>
+                        <p>Top-notch entertainment for your event.</p>
+                    </div>
+
+                    <div class="facility-card">
+                        <img src="asserts/images/img9.png" alt="Beauticians">
+                        <h3>Beauticians & Groomers</h3>
+                        <p>Professional grooming services for your event.</p>
+                    </div>
+                </div>
+
+                <div class="services-btn-container">
+                    <a href="https://web.archive.org/web/20190306200002/http://www.svfunctionhall.in/services.php" class="services-btn">More Facilities</a>
+                </div>
+            </section>
+
+            <section class="about-section">
+                <div class="about-container">
+
+                    <!-- Left Side Image -->
+                    <div class="about-image">
+                        <img src="asserts/images/img10.jpg" alt="Convention Hall Image">
+                    </div>
+
+                    <!-- Right Side Content -->
+                    <div class="about-content">
+                        <h5>About Convention Hall</h5>
+                        <h2>SV Conventions</h2>
+
+                        <p style="text-align: justify;">
+                            Ours is Spacious Central Air Conditioned function hall with ground and spacious lawn,Hall,
+                            Dining Hall and Separate Lobbies available.The Main function hall contains about 400 to 500
+                            seating capacity.
+                            Dinning capacity is upto 200 to 250. 9 rooms available for comfortable Environment.
+                            We provide Function halls not only for marriages but also for Receptions and Birthday
+                            Parties.
+                            We are in the business of exceeding expectations. We provide you all the things you need for
+                            yours aspicous occasion
+                            and those special extras that you would never expect, to create something extraordinary.
+                        </p>
+
+                        <a href="https://web.archive.org/web/20190225234526/http://www.svfunctionhall.in/about.php" class="know-more-btn">Know More →</a>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="gallery-section">
+                <h5 class="gallery-title">View Our Gallery</h5>
+                <div class="gallery-images">
+                    <img src="asserts/images/img11.jpg" alt="">
+                    <img src="asserts/images/img12.jpg" alt="">
+                    <img src="asserts/images/img13.jpg" alt="">
+                    <img src="asserts/images/img14.jpg" alt="">
+                    <img src="asserts/images/img15.jpg" alt="">
+                    <img src="asserts/images/img16.jpg" alt="">
+                    <img src="asserts/images/img17.jpg" alt="">
+                    <img src="asserts/images/img18.jpg" alt="">
+                </div>
+                <div class="gallery-btn">
+                    <a href="https://web.archive.org/web/20190317004851/http://www.svfunctionhall.in/gallery.php">VIEW GALLERY</a>
+                </div>
+            </section>
+            </main>
+
+            <!-- footer -->
+
+            <footer class="footer">
+                <div class="footer-container">
+
+                    <!-- Column 1 -->
+                    <div class="footer-col">
+                        <img src="asserts/images/logo.jpg" class="footer-logo" alt="Logo">
+
+                        <p style="text-align: justify;">
+                            Where Every Event Becomes Extraordinary. Experience Luxury, Convenience, and
+                            Unforgettable Memories at Vishwanadh Conventions. Book Now!
+                        </p>
+
+                        <div class="footer-social">
+                            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                            <a href="#"><i class="fa-brands fa-google"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Column 2 -->
+                    <div class="footer-col">
+                        <h3>Services</h3>
+                        <ul>
+                            <li><a href="https://web.archive.org/web/20190310030808/http://www.svfunctionhall.in/services.php?id=48">Function Hall</a></li>
+                            <li><a href="https://web.archive.org/web/20190310030911/http://www.svfunctionhall.in/services.php?id=49">Dinning Hall</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 3 -->
+                    <div class="footer-col">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="https://web.archive.org/web/20190328182246/http://www.svfunctionhall.in/about.php">About Us</a></li>
+                            <li><a href="https://web.archive.org/web/20190317004851/http://www.svfunctionhall.in/gallery.php">Gallery</a></li>
+                            <li><a href="https://web.archive.org/web/20190310032240/http://www.svfunctionhall.in/contact.php">Contact Us</a></li>
+                            <li><a href="privacy_policy.html">Privacy Policy</a></li>
+                            <li><a href="terms_conditions.html">Terms & Conditions</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 4 -->
+                    <div class="footer-col">
+                        <a href="https://www.google.com/maps/place/17%C2%B000'24.2%22N+81%C2%B048'09.7%22E/@17.0067148,81.8026811,995m/data=!3m2!1e3!4b1!4m4!3m3!8m2!3d17.0067148!4d81.8026811?entry=ttu&g_ep=EgoyMDI1MTExMi4wIKXMDSoASAFQAw%3D%3D">
+                        <h3>Contact Us</h3>
+                        <p>J.n Road, Rajahmundry Ho,<br>Rajahmundry, Andhra Pradesh<br>533101</p>
+                        </a>    
+                        <a href="mailto:info@svfunctionhall.in"></a><p>info@svfunctionhall.in/p></p></a>
+                        <a href="tel: +91 93913 81165"><p>+91 93913 81165</p></a>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p>Copyright © 2025 SV Function Hall,  All Rights Reserved | Designed & Developed by  <a href="https://sunraisesolutions.com/"><span>Sunraise Solutions</span></a></p>
+                </div>
+            </footer>
+
+</body>
+
+</html>
